@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+*{margin:0;padding:0}
+.content{
+	width:600px;
+	height:400px;
+	margin:20px auto;
+	border:1px solid gray;
+	padding:5px;
+	position:relative;
+}
+.topC:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+.topC{
+	zoom:1;
+}
+.topC p,.topC button{
+	float:left;
+}
+.topC button{
+	margin-top:0px;
+	margin-left:10px;
+	
+}
+#varSize{
+	width:100px;
+	height:100px;
+	background:gray;
+	margin-top:10px;
+}
+.varSize{
+	width:100px;
+	height:100px;
+	background:gray;
+}
+
+#changeColor{
+	width:270px;
+	height:150px;
+	position:absolute;
+	right:20px;
+	bottom:20px;
+	display:none;
+}
+#changeColor a,.changeColor span{
+	float:left;
+}
+ul,li{
+	list-style:none;
+}
+
+ul{
+	overflow:hidden;
+}
+ul a,ul span{
+	float:left;
+}
+ul a{
+	width:35px;
+	height:30px;
+	background:gray;
+	border:1px solid black;
+	margin-left:5px;
+	text-align:center;
+	text-decoration:none;
+	color:white;
+	line-height:30px;
+}
+li{
+	margin-bottom:5px;
+	overflow:hidden;
+}
+.redC{
+	background:red;
+}
+.yellowC{
+	background:#ffcc00;
+}
+.blueC{
+	background:blue;
+}
+
+.confirmBtn{
+	text-align:center;
+	padding-top:10px;
+}
+</style>
+<script>
+	window.onload=function(){
+		var showChange=document.getElementById("showChange");
+		var varSize=document.getElementById("varSize");
+		showChange.onclick=function(){//按钮点击后
+			var controlC=document.getElementById("changeColor");
+				controlC.style.display="block";
+
+				//设置颜色
+				var changeC=document.getElementById("changeC").getElementsByTagName("a");
+				for (var i=0;i<changeC.length ;i++ )
+				{
+					changeC[i].index=i;
+					changeC[i].onclick=function(){
+						switch(this.index){
+							case 0:
+							varSize.style.background="red";
+							break;
+							case 1:
+							varSize.style.background="yellow";
+							break;
+							case 2:
+							varSize.style.background="blue";
+							break;
+						};
+						//alert(this.index);
+					};
+				}
+				//设置宽度
+				var changeW=document.getElementById("changeW").getElementsByTagName("a");
+				for (var i=0;i<changeW.length ;i++ )
+				{
+					changeW[i].index=i;
+					changeW[i].onclick=function(){
+						varSize.style.width=this.innerHTML+"px";
+						//alert(this.index);
+					};
+				}
+				//设置高度
+				var changeH=document.getElementById("changeH").getElementsByTagName("a");
+				for (var i=0;i<changeH.length ;i++ )
+				{
+					changeH[i].index=i;
+					changeH[i].onclick=function(){
+						varSize.style.height=this.innerHTML+"px";
+						//alert(this.index);
+					};
+				}
+				//点击确定
+				var confirm=document.getElementById("confirm");
+				confirm.onclick=function(){
+					controlC.style.display="none";
+				};
+				//点击恢复
+				var reset=document.getElementById("reset");
+				reset.onclick=function(){
+					varSize.className="varSize";//如果添加varSize{width:100px;	height:100px;	background:gray;}其优先级别较低 设置无效
+					//varSize.setAttribute("class","varSize")
+					varSize.style.width="100px";
+					varSize.style.height="100px";
+					varSize.style.background="gray";
+				};
+		};
+
+
+	};
+</script>
+</head>
+<body>
+<div class="content">
+	<div class="topC">
+		<p>请为下面的div设置样式:</p>
+		<button type="button" id="showChange">点击设置</button>
+	</div>
+	
+	<div id="varSize">
+	</div>
+
+	<div id="changeColor">
+		<ul>
+			<li class="adColor" id="changeC"><span>请选择背景颜色：</span><a href="javascript:void(0);" class="redC">红</a><a href="javascript:;" class="yellowC">黄</a><a href="javascript:;" class="blueC">蓝</a></li>
+			<li id="changeW"><span>请选择背景颜色：</span><a href="javascript:;">150</a><a href="javascript:;">200</a><a href="javascript:;">250</a></li>
+			<li id="changeH"><span>请选择背景颜色：</span><a href="javascript:;">150</a><a href="javascript:;">200</a><a href="javascript:;">250</a></li>
+		</ul>
+		<div class="confirmBtn">
+			<button type="button" id="reset">恢复</button>
+			<button type="button" id="confirm">确定</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>
