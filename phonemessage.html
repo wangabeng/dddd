@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+.container{
+	width:244px;
+	height:420px;
+	border:1px solid gray;
+	margin:0 auto;
+	position:relative;
+	padding:10px;
+}
+
+.clearfix:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+.content{
+	height:368px;
+	overflow:hidden;
+}
+.rightMessage{
+	zoom:1;
+	width:200px;
+	padding-right:30px;
+	background:url("right.png") no-repeat 200px 3px; 
+	margin:10px;
+}
+.rightMessage span,.rightMessage img{
+	float:right;
+}
+.rightMessage span{
+	background:#99cc33;
+	color:white;
+	padding:5px;
+	word-wrap:break-word;word-break:break-all;
+}
+
+.leftMessage{
+	zoom:1;
+	width:200px;
+	padding-left:30px;
+	background:url("left.png") no-repeat -1px 0; 
+	margin:10px;
+	
+}
+.leftMessage span,.leftMessage img{
+	float:left;
+}
+.leftMessage span{
+	background:#c6c6c6;
+	padding:5px;
+	word-wrap:break-word;word-break:break-all;/*解决字母不会自动换行的问题 不存在兼容性问题 IE6未测*/
+}
+
+.bottomC{
+	width:244px;
+	height:48px;
+	border-top:1px solid gray;
+	position:absolute;
+	bottom:0;
+}
+.bottomC img,.bottomC input,.bottomC span{
+	float:left;
+	margin-left:10px;
+	margin-top:10px;
+}
+.bottomC img{
+	width:30px;
+	height:30px;
+}
+.bottomC input{
+	width:140px;
+	height:30px;
+	margin-top:8px;
+}
+.bottomC span{
+	cursor:pointer;
+}
+.porit{
+	border:1px solid gray;
+}
+</style>
+</head>
+<script>
+window.onload=function(){
+	//设置开关 默认是左头像 即true 如果是false就是右头像
+	var onOff=true;//图片地址 宽高 颜色都不可以用来做判断 
+	var porit=document.getElementById("porit");
+	var inputTxt=document.getElementById("inputTxt");
+	//切换头像
+	porit.onclick=function(){
+		if (onOff)
+		{
+			porit.src="right.png";	
+			onOff=false;
+		}else{
+			porit.src="left.png";	
+			onOff=true;
+		}
+	};
+	//发送消息
+	var contentTxt=document.getElementById("content");
+	var sentTxt=document.getElementById("sent");
+	sentTxt.onclick=function(){
+		if (inputTxt.value!="")
+		{
+			if (onOff)//如果是左边头像 
+			{
+				contentTxt.innerHTML='<div class="leftMessage clearfix"><span>'+inputTxt.value+'</span></div>'+contentTxt.innerHTML;
+			}else{
+				contentTxt.innerHTML='<div class="rightMessage clearfix"><span>'+inputTxt.value+'</span></div>'	+contentTxt.innerHTML;
+			}
+		}
+		
+	};
+};
+</script>
+<body>
+<div class="container">
+	<div class="content" id="content"><!--内容区-->
+		<div class="rightMessage clearfix">
+			<span>如果是中dddddddddddddddddddddddddddddddddddddddd</span>
+		</div>
+		<div class="leftMessage clearfix">
+			<span>如果是中</span>
+		</div>
+
+		<div class="leftMessage clearfix">
+			<span>如果是中rtetrtetttttttttttttttttttttttttttttttttttttttttttttt</span>
+		</div>
+
+	</div>
+
+	<div class="bottomC">
+		<img class="porit" id="porit" src="left.png"></img>
+		<input type="text" id="inputTxt">
+		<span  id="sent">发送</span>
+	</div>
+</div>
+</body>
+</html>

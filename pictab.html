@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+#container{
+	width:440px;
+	height:510px;
+	margin:0 auto;
+	border:1px solid gray;
+}
+#aButton{
+	widht:440px;
+	height:30px;
+	text-align:center;
+	padding-top:10px;
+}
+#desTab{
+	text-align:center;
+}
+#main{
+	width:400px;
+	height:390px;
+	border:5px solid #dbdbdb;
+	text-align:center;
+	position:relative;
+	margin:0 auto;
+}
+#main img{
+	width:400px;
+	height:390px;
+	
+}
+#topTit{
+	width:400px;
+	height:30px;
+	line-height:30px;
+	font-weight:normal;
+	position:absolute;
+	top:0px;
+	left:0;
+	background:#282828;
+	opacity:0.6;
+	margin-top:0;
+	color:#ffffff;
+}
+#bottomTit{
+	width:400px;
+	height:30px;
+	line-height:30px;
+	font-weight:normal;
+	position:absolute;
+	bottom:0px;
+	left:0;
+	background:#282828;
+	filter: alpha(opacity=60); /* IE */   
+	-moz-opacity:0.6;    /* FF 主要是为了兼容老版本的FF */
+	opacity:0.6;    /* FF */
+	margin-bottom:0;
+	color:#ffffff;
+}
+
+#control{
+	width:400px;
+	height:30px;
+	position:absolute;
+	left:0;
+	top:170px;
+}
+#control div{
+	width:40px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	background:#f9f9f9;
+	color:black;
+}
+#control div:hover{
+	filter: alpha(opacity=50); /* IE */   
+	-moz-opacity:0.5;    /* FF 主要是为了兼容老版本的FF */
+	opacity:0.5;    /* FF */
+	cursor:pointer;
+}
+#control #leftBtn{
+	float:left;
+	margin-left:10px;
+}
+#control #rightBtn{
+	float:right;
+	margin-right:10px;
+}
+</style>
+</head>
+<script>
+	window.onload=function(){
+		var cicleBtn=document.getElementById("cicle");
+		var orderBtn=document.getElementById("order");
+		var desTab=document.getElementById("desTab");
+		var leftBtn=document.getElementById("leftBtn");
+		var rightBtn=document.getElementById("rightBtn");
+		var topTit=document.getElementById("topTit");
+		var bottomTit=document.getElementById("bottomTit");
+		var bottomTitArr=["美女","肌肉男","性感","COSPlay"];
+		tabCircle();
+		var cur=1;//当前页是第一页
+
+		//点击循环切换
+		//cicleBtn.onclick=tabCircle;//如果加tabCircle() 那么赋值就是函数执行的返回值 ；不加括号 就是函数执行（过程）
+		//或者这样写
+		cicleBtn.onclick=function(){
+			tabCircle();
+		};
+
+		//点击顺序切换
+		orderBtn.onclick=function(){
+			desTab.innerHTML="图片可以循环切换1-4-1";
+
+			//点击左边的按钮 
+			leftBtn.onclick=function(){
+				cur--;
+				if (cur==0)
+				{
+					cur=1;
+					alert("已经是第一张了");
+				}
+				showPic.src=cur+".jpg";
+				//改变上下标题的文字
+				topTit.innerHTML=cur+" / 4";
+				bottomTit.innerHTML=bottomTitArr[cur-1];
+			};
+			//点击右边的按钮 
+			rightBtn.onclick=function(){
+				cur++;
+				if (cur==5)
+				{
+					cur=4;
+					alert("已经是最后一张了");
+				}
+				showPic.src=cur+".jpg";
+				//改变上下标题的文字
+				topTit.innerHTML=cur+" / 4";
+				bottomTit.innerHTML=bottomTitArr[cur-1];
+			};
+		};
+
+		//初始化是可以循环播放的
+		function tabCircle(){
+			desTab.innerHTML="图片可以循环切换1-4-1";
+
+			//点击左边的按钮 
+			leftBtn.onclick=function(){
+				cur--;
+				if (cur==0)
+				{
+					cur=4;
+				}
+				showPic.src=cur+".jpg";
+				//改变上下标题的文字
+				topTit.innerHTML=cur+" / 4";
+			};
+			//点击右边的按钮 
+			rightBtn.onclick=function(){
+				cur++;
+				if (cur==5)
+				{
+					cur=1;
+				}
+				showPic.src=cur+".jpg";
+				//改变上下标题的文字
+				topTit.innerHTML=cur+" / 4";
+				bottomTit.innerHTML=bottomTitArr[cur-1];
+			};
+		};
+
+	};
+</script>
+<body>
+	<div id="container">
+		<div id="aButton">
+			<button type="button" id="cicle">循环切换</button>
+			<button type="button" id="order">顺序切换</button>
+		</div>
+
+		<p id="desTab">
+			图片可以循环切换1-4-1
+		</p>
+
+		<div id="main">
+			<img src="1.jpg" id="showPic">
+			<p id="topTit">1 / 4</p>
+			<p id="bottomTit">美女</p>
+			<div id="control">
+				<div id="leftBtn"><a>&lt;</a></div>
+				<div id="rightBtn"><a>&gt;</a></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
